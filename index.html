@@ -429,7 +429,7 @@
     </header>
 
     <section id="home" class="hero">
-        <h1>Crystal Clear Headlights, Delivered to You</h1>
+        <h1>Crystal Clear Headlights, Right at Your Door</h1>
         <p>Professional mobile headlight restoration services across Northern Utah</p>
         <a href="#booking" class="cta-button">Schedule Your Service</a>
     </section>
@@ -519,7 +519,8 @@
                 Thank you! We'll contact you within 24 hours to confirm your appointment.
             </div>
             <h2>Schedule Your Appointment</h2>
-            <form id="bookingForm">
+            <form id="bookingForm" name="contact" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="contact">
                 <div class="form-group">
                     <label for="name">Full Name *</label>
                     <input type="text" id="name" name="name" required>
@@ -538,15 +539,6 @@
                         <option value="">Select a service...</option>
                         <option value="basic">Basic Restoration - $55</option>
                         <option value="vistapro">VistaPRO Restoration - $85</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="location">Service Location *</label>
-                    <select id="location" name="location" required>
-                        <option value="">Select county...</option>
-                        <option value="weber">Weber County</option>
-                        <option value="morgan">Morgan County</option>
-                        <option value="davis">Davis County</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -579,23 +571,9 @@
 
     <script>
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                service: document.getElementById('service').value,
-                location: document.getElementById('location').value,
-                address: document.getElementById('address').value,
-                date: document.getElementById('date').value,
-                message: document.getElementById('message').value
-            };
-            
-            console.log('Form submitted:', formData);
-            
+            // Netlify handles the form submission, so we don't prevent default
+            // Just show the success message
             document.getElementById('successMessage').style.display = 'block';
-            document.getElementById('bookingForm').reset();
             
             setTimeout(() => {
                 document.getElementById('successMessage').style.display = 'none';
