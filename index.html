@@ -364,6 +364,33 @@
             fill: white;
         }
 
+        .see-more-btn {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .see-more-btn button {
+            background: #2a5298;
+            color: white;
+            padding: 12px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .see-more-btn button:hover {
+            background: #1e3c72;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(42,82,152,0.4);
+        }
+
+        .gallery-item.hidden {
+            display: none;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -445,19 +472,17 @@
                     <img src="images/before-after-1.jpg" alt="Before and After Headlight Restoration" style="width: 100%; height: auto; display: block;">
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-placeholder">Before Photo</div>
-                    <div class="gallery-caption">
-                        <strong>Coming Soon!</strong><br>
-                        More transformations coming soon
-                    </div>
+                    <img src="images/before-after-2.jpg" alt="Before and After Headlight Restoration" style="width: 100%; height: auto; display: block;">
                 </div>
                 <div class="gallery-item">
-                    <div class="gallery-placeholder">After Photo</div>
-                    <div class="gallery-caption">
-                        <strong>Coming Soon!</strong><br>
-                        Professional restoration results
-                    </div>
+                    <img src="images/before-after-3.jpg" alt="Before and After Headlight Restoration" style="width: 100%; height: auto; display: block;">
                 </div>
+                <div class="gallery-item hidden">
+                    <img src="images/before-after-4.jpg" alt="Before and After Headlight Restoration" style="width: 100%; height: auto; display: block;">
+                </div>
+            </div>
+            <div class="see-more-btn">
+                <button id="seeMoreBtn" onclick="toggleGallery()">See More</button>
             </div>
         </div>
     </section>
@@ -570,6 +595,23 @@
     </a>
 
     <script>
+        function toggleGallery() {
+            const hiddenItems = document.querySelectorAll('.gallery-item.hidden');
+            const btn = document.getElementById('seeMoreBtn');
+            
+            if (hiddenItems.length > 0 && hiddenItems[0].style.display === 'block') {
+                hiddenItems.forEach(item => {
+                    item.style.display = 'none';
+                });
+                btn.textContent = 'See More';
+            } else {
+                hiddenItems.forEach(item => {
+                    item.style.display = 'block';
+                });
+                btn.textContent = 'See Less';
+            }
+        }
+
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
             // Netlify handles the form submission, so we don't prevent default
             // Just show the success message
