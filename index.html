@@ -274,44 +274,82 @@
             padding: 80px 2rem;
         }
 
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+        .gallery-carousel-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 2rem auto;
+            overflow: hidden;
+        }
+
+        .gallery-carousel {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(42, 82, 152, 0.8);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-arrow:hover {
+            background: rgba(30, 60, 114, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .gallery-arrow.left {
+            left: 10px;
+        }
+
+        .gallery-arrow.right {
+            right: 10px;
         }
 
         .gallery-item {
+            min-width: calc(33.333% - 1.33rem);
+            margin: 0 0.66rem;
             background: white;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 5px 25px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
         }
 
-        .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .gallery-placeholder {
+        .gallery-item img {
             width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            font-weight: bold;
+            height: 300px;
+            object-fit: cover;
+            display: block;
         }
 
-        .gallery-caption {
-            padding: 1.5rem;
-            text-align: center;
-            color: #333;
+        @media (max-width: 768px) {
+            .gallery-item {
+                min-width: calc(100% - 1.33rem);
+            }
+            
+            .gallery-item img {
+                height: 250px;
+            }
         }
 
         .more-services-section {
+            background: white;
+            padding: 80px 2rem;
+        }
+
+        .reviews-section {
             background: white;
             padding: 80px 2rem;
         }
@@ -391,6 +429,143 @@
             display: none;
         }
 
+        .more-services-section {
+            background: white;
+            padding: 80px 2rem;
+        }
+
+        .review-carousel {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: #f8f9fa;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+            position: relative;
+            min-height: 250px;
+        }
+
+        .review-item {
+            display: none;
+            text-align: center;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .review-item.active {
+            display: block;
+        }
+
+        .review-stars {
+            color: #ffc107;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            font-size: 1.2rem;
+            color: #333;
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: #1e3c72;
+            font-size: 1.1rem;
+        }
+
+        .review-dots {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .dot {
+            height: 12px;
+            width: 12px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #2a5298;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .faq-section {
+            max-width: 800px;
+            margin: 4rem auto 0;
+            padding: 0 1rem;
+        }
+
+        .faq-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #1e3c72;
+            margin-bottom: 2rem;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: background-color 0.3s;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            background-color: #f8f9fa;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: #2a5298;
+            font-weight: bold;
+            transition: transform 0.3s;
+        }
+
+        .faq-icon.active {
+            transform: rotate(45deg);
+        }
+
+        .faq-question-text {
+            font-weight: 600;
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            padding: 0 1.5rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .faq-answer.active {
+            max-height: 500px;
+            padding: 0 1.5rem 1.5rem 4rem;
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -467,42 +642,36 @@
             <p style="text-align: center; color: #666; margin-bottom: 2rem; font-size: 1.1rem;">
                 See the dramatic transformation our restoration services provide
             </p>
-            <div class="gallery-grid">
-                <div class="gallery-item">
-                    <img src="images/before-after-1.jpg" alt="Before and After Headlight Restoration" style="width: 100%; height: auto; display: block;">
+            <div class="gallery-carousel-container">
+                <button class="gallery-arrow left" onclick="moveGallery(-1)">‹</button>
+                <div class="gallery-carousel" id="galleryCarousel">
+                    <div class="gallery-item">
+                        <img src="images/before-after-1.jpg" alt="Before and After Headlight Restoration">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/before-after-2.jpg" alt="Before and After Headlight Restoration">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/before-after-3.jpg" alt="Before and After Headlight Restoration">
+                    </div>
+                    <div class="gallery-item">
+                        <img src="images/before-after-4.jpg" alt="Before and After Headlight Restoration">
+                    </div>
                 </div>
-                <div class="gallery-item">
-                    <img src="images/before-after-2.jpg" alt="Before and After Headlight Restoration" style="width: 100%; height: auto; display: block;">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/before-after-3.jpg" alt="Before and After Headlight Restoration" style="width: 100%; height: auto; display: block;">
-                </div>
-                <div class="gallery-item hidden">
-                    <img src="images/before-after-4.jpg" alt="Before and After Headlight Restoration" style="width: 100%; height: auto; display: block;">
-                </div>
-            </div>
-            <div class="see-more-btn">
-                <button id="seeMoreBtn" onclick="toggleGallery()">See More</button>
+                <button class="gallery-arrow right" onclick="moveGallery(1)">›</button>
             </div>
         </div>
     </section>
 
     <section id="services" class="container">
         <h2 class="section-title">Our Services</h2>
-        <div class="services-grid">
-            <div class="service-card">
-                <h3>Basic Restoration</h3>
-                <p>Perfect for light to moderate oxidation. We'll restore clarity and improve nighttime visibility.</p>
-                <p><strong>Includes:</strong> Professional wet sanding, polishing, and basic UV sealant for protection</p>
-                <p style="color: #666; font-size: 0.95rem; margin-top: 1rem;">Great value for improving your headlight clarity with basic longevity.</p>
-                <div class="price">$55</div>
-            </div>
-            <div class="service-card">
+        <div style="display: flex; justify-content: center;">
+            <div class="service-card" style="max-width: 600px;">
                 <h3>VistaPRO Restoration</h3>
-                <p>Our premium service with multi-year UV protection. Built to withstand countless rainstorms and harsh Utah winters.</p>
-                <p><strong>Includes:</strong> Deep restoration, multi-stage polishing, advanced UV coating with extended durability</p>
-                <p style="color: #666; font-size: 0.95rem; margin-top: 1rem;">Maximum protection and clarity that lasts years, not months.</p>
-                <div class="price">$85</div>
+                <p>Professional headlight restoration for light to severe oxidation. We'll restore clarity, improve nighttime visibility, and provide UV protection built to withstand countless rainstorms and harsh Utah winters.</p>
+                <p><strong>Includes:</strong> Professional oxidation removal, multi-stage wet sanding, and advanced UV coating with extended durability</p>
+                <p style="color: #666; font-size: 0.95rem; margin-top: 1rem;">Maximum protection and clarity</p>
+                <div class="price">$65</div>
             </div>
         </div>
         <div style="text-align: center; color: #666; margin-top: 2rem;">
@@ -534,6 +703,36 @@
                 <div class="county-badge">Weber County</div>
                 <div class="county-badge">Morgan County</div>
                 <div class="county-badge">Davis County</div>
+                <div class="county-badge">Box Elder County</div>
+                <div class="county-badge">Salt Lake County</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="review-carousel">
+                <div class="review-item active">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"ClearVista Co. did a great job on my headlights. I could barely see at night even with my headlights on, now they're crystal clear. Would recommend to anyone!"</p>
+                    <p class="review-author">- Amelia Nell</p>
+                </div>
+                <div class="review-item">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"They came to my work and did it, looks great and last's long. Would recommend."</p>
+                    <p class="review-author">- Cole Hilton</p>
+                </div>
+                <div class="review-item">
+                    <div class="review-stars">★★★★★</div>
+                    <p class="review-text">"Great service, the guy who helped me was quick and super friendly definitely worth it!"</p>
+                    <p class="review-author">- Jordan Howe</p>
+                </div>
+                <div class="review-dots">
+                    <span class="dot active" onclick="currentReview(1)"></span>
+                    <span class="dot" onclick="currentReview(2)"></span>
+                    <span class="dot" onclick="currentReview(3)"></span>
+                </div>
             </div>
         </div>
     </section>
@@ -559,14 +758,6 @@
                     <input type="tel" id="phone" name="phone" required>
                 </div>
                 <div class="form-group">
-                    <label for="service">Service Needed *</label>
-                    <select id="service" name="service" required>
-                        <option value="">Select a service...</option>
-                        <option value="basic">Basic Restoration - $55</option>
-                        <option value="vistapro">VistaPRO Restoration - $85</option>
-                    </select>
-                </div>
-                <div class="form-group">
                     <label for="address">Address *</label>
                     <input type="text" id="address" name="address" placeholder="Street address where service will be performed" required>
                 </div>
@@ -580,11 +771,65 @@
                 </div>
                 <button type="submit" class="submit-btn">Request Appointment</button>
             </form>
+
+            <div class="faq-section">
+                <h3 class="faq-title">Frequently Asked Questions</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(1)">
+                        <span class="faq-icon" id="icon1">+</span>
+                        <span class="faq-question-text">How long will a refinished lens remain clear?</span>
+                    </div>
+                    <div class="faq-answer" id="answer1">
+                        This will be dependent on many factors that vary greatly including; environment, altitude, lens material, lens design, surface coating, indoor or outdoor storage, and exposure to harsh car wash chemicals. We've seen headlights begin to oxidize as early as 10 months up to 2 or more years depending on the environment. This is a difficult question to answer accurately.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(2)">
+                        <span class="faq-icon" id="icon2">+</span>
+                        <span class="faq-question-text">How long will this process take?</span>
+                    </div>
+                    <div class="faq-answer" id="answer2">
+                        On average it will take about 15-20 minutes per headlight. Headlights that are larger or that are harder to sand will require more time and can take from 30-40 minutes per lens. Smaller lenses may only take about 10 minutes per lens. The first sanding step that removes the yellowing will normally be the most time consuming step.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(3)">
+                        <span class="faq-icon" id="icon3">+</span>
+                        <span class="faq-question-text">Can a headlight lens be refinished more than once?</span>
+                    </div>
+                    <div class="faq-answer" id="answer3">
+                        Yes, a lens can be refinished several times. Most lenses are made of polycarbonate material that is 1/8" to a ¼" thick. We are only removing a small fraction, less than 1/32" in most cases, from the overall lens thickness.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(4)">
+                        <span class="faq-icon" id="icon4">+</span>
+                        <span class="faq-question-text">What plastic are the headlights made of?</span>
+                    </div>
+                    <div class="faq-answer" id="answer4">
+                        Most lenses are made of polycarbonate material, some are polyacrylic. Both can be restored with this process. We do not use this restoration system on glass or glass lenses.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(5)">
+                        <span class="faq-icon" id="icon5">+</span>
+                        <span class="faq-question-text">Does a refinished lens yellow sooner than an OEM or new aftermarket replacement lens?</span>
+                    </div>
+                    <div class="faq-answer" id="answer5">
+                        Yes, the refinished lenses will likely yellow sooner than an equivalent OEM or aftermarket lens. However, in order to restore clarity to the lens, the degraded UV coating must be removed. The UV resistance will vary on refinished lenses based on environment, lens composition, and many other factors. Therefore it is difficult to estimate how much sooner a lens will yellow when compared to an OEM or aftermarket replacement lens.
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 ClearVista Co. | Professional Headlight Restoration | Serving Weber, Morgan & Davis Counties</p>
+        <p>&copy; 2025 ClearVista Co. | Professional Headlight Restoration | Serving all of Northern Utah</p>
         <p style="margin-top: 0.5rem; opacity: 0.8;">Mobile Service - We Come to You!</p>
     </footer>
 
@@ -595,21 +840,87 @@
     </a>
 
     <script>
-        function toggleGallery() {
-            const hiddenItems = document.querySelectorAll('.gallery-item.hidden');
-            const btn = document.getElementById('seeMoreBtn');
+        let galleryIndex = 0;
+        let galleryInterval;
+
+        function moveGallery(direction) {
+            const carousel = document.getElementById('galleryCarousel');
+            const items = document.querySelectorAll('.gallery-item');
+            const itemWidth = items[0].offsetWidth + 13.2;
             
-            if (hiddenItems.length > 0 && hiddenItems[0].style.display === 'block') {
-                hiddenItems.forEach(item => {
-                    item.style.display = 'none';
-                });
-                btn.textContent = 'See More';
-            } else {
-                hiddenItems.forEach(item => {
-                    item.style.display = 'block';
-                });
-                btn.textContent = 'See Less';
+            galleryIndex += direction;
+            
+            if (galleryIndex < 0) {
+                galleryIndex = items.length - 3;
+            } else if (galleryIndex >= items.length - 2) {
+                galleryIndex = 0;
             }
+            
+            carousel.style.transform = `translateX(-${galleryIndex * itemWidth}px)`;
+            
+            // Reset the auto-scroll timer when manually clicking
+            clearInterval(galleryInterval);
+            startGalleryCarousel();
+        }
+
+        function startGalleryCarousel() {
+            const carousel = document.getElementById('galleryCarousel');
+            const items = document.querySelectorAll('.gallery-item');
+            const itemWidth = items[0].offsetWidth + 13.2;
+            
+            galleryInterval = setInterval(() => {
+                galleryIndex++;
+                if (galleryIndex >= items.length - 2) {
+                    galleryIndex = 0;
+                }
+                carousel.style.transform = `translateX(-${galleryIndex * itemWidth}px)`;
+            }, 5000);
+        }
+
+        // Start gallery carousel when page loads
+        window.addEventListener('load', startGalleryCarousel);
+
+        let currentReviewIndex = 1;
+        let reviewInterval;
+
+        function showReview(n) {
+            const reviews = document.querySelectorAll('.review-item');
+            const dots = document.querySelectorAll('.dot');
+            
+            if (n > reviews.length) { currentReviewIndex = 1; }
+            if (n < 1) { currentReviewIndex = reviews.length; }
+            
+            reviews.forEach(review => review.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            reviews[currentReviewIndex - 1].classList.add('active');
+            dots[currentReviewIndex - 1].classList.add('active');
+        }
+
+        function currentReview(n) {
+            clearInterval(reviewInterval);
+            currentReviewIndex = n;
+            showReview(currentReviewIndex);
+            startReviewCarousel();
+        }
+
+        function nextReview() {
+            currentReviewIndex++;
+            showReview(currentReviewIndex);
+        }
+
+        function startReviewCarousel() {
+            reviewInterval = setInterval(nextReview, 5000);
+        }
+
+        startReviewCarousel();
+
+        function toggleFAQ(num) {
+            const answer = document.getElementById('answer' + num);
+            const icon = document.getElementById('icon' + num);
+            
+            answer.classList.toggle('active');
+            icon.classList.toggle('active');
         }
 
         document.getElementById('bookingForm').addEventListener('submit', function(e) {
